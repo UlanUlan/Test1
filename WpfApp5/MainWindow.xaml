@@ -7,23 +7,66 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        <TabControl x:Name="TabControl" SelectionChanged="TabControl_SelectionChanged">
+        <TabControl x:Name="TabControl">
             <TabItem Name="GroupTabItem" Header="Group">
                 <TabItem.Content>
-                    <ListView x:Name="GroupListView" ItemsSource="">
-                        <ItemsControl>
-                        </ItemsControl>
+                    <ListView x:Name="GroupListView">
+                        <ListView.View>
+                            <GridView>
+                            <GridView.Columns>
+                                <GridViewColumn Header="GroupId" DisplayMemberBinding="{Binding Path=GroupId}"></GridViewColumn>
+                                <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Path=Name}"></GridViewColumn>
+                            </GridView.Columns>
+                        </GridView>
+                        </ListView.View>
+                    </ListView>
+                </TabItem.Content>
+            </TabItem>
+            <TabItem Name="ModelTabItem" Header="Model">
+                <TabItem.Content>
+                    <ListView x:Name="ModelListView">
+                        <ListView.View>
+                            <GridView>
+                                <GridView.Columns>
+                                    <GridViewColumn Header="GroupId" DisplayMemberBinding="{Binding Path=ModelId}"></GridViewColumn>
+                                    <GridViewColumn Header="Code" DisplayMemberBinding="{Binding Path=Code}"></GridViewColumn>
+                                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Path=Name}"></GridViewColumn>
+                                    <GridViewColumn Header="SeriesId" DisplayMemberBinding="{Binding Path=SeriesId}"></GridViewColumn>
+                                </GridView.Columns>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </TabItem.Content>
+            </TabItem>
+            <TabItem  Name="PavilionTabItem" Header="Pavilion">
+                <TabItem.Content>
+                    <ListView x:Name="PavilionListView">
+                        <ListView.View>
+                            <GridView>
+                                <GridView.Columns>
+                                    <GridViewColumn Header="PavilionId" DisplayMemberBinding="{Binding Path=PavilionId}"></GridViewColumn>
+                                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Path=Name}"></GridViewColumn>
+                                </GridView.Columns>
+                            </GridView>
+                        </ListView.View>
                     </ListView>
                 </TabItem.Content>
             </TabItem>
             <TabItem Name="StatusTabItem" Header="Status">
-                <TabItem.Content>a</TabItem.Content>
-            </TabItem>
-            <TabItem  Name="PavilionTabItem" Header="Pavilion">
-                <TabItem.Content>a</TabItem.Content>
-            </TabItem>
-            <TabItem Name="ModelTabItem" Header="Model">
-                <TabItem.Content>a</TabItem.Content>
+                <TabItem.Content>
+                    <ListView x:Name="StatusListView">
+                        <ListView.View>
+                            <GridView>
+                                <GridView.Columns>
+                                    <GridViewColumn Header="StatusId" DisplayMemberBinding="{Binding Path=StatusId}"></GridViewColumn>
+                                    <GridViewColumn Header="NameEn" DisplayMemberBinding="{Binding Path=NameEn}"></GridViewColumn>
+                                    <GridViewColumn Header="NameRu" DisplayMemberBinding="{Binding Path=NameRu}"></GridViewColumn>
+                                    <GridViewColumn Header="StatusTypeId" DisplayMemberBinding="{Binding Path=StatusTypeId}"></GridViewColumn>
+                                </GridView.Columns>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </TabItem.Content>
             </TabItem>
         </TabControl>
     </Grid>

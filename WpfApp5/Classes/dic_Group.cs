@@ -1,14 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Linq.Mapping;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace WpfApp5.Classes
 {
-    public class GroupCs
+    [Table]
+    public class dic_Group
     {
-        public int Id { get; set; }
+        [Column(IsPrimaryKey = true)]
+        public int GroupId { get; set; }
+        [Column]
         public string Name { get; set; }
     }
 }

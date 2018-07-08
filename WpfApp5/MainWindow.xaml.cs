@@ -18,7 +18,7 @@ using System.Data;
 using WpfApp5.Classes;
 using System.ComponentModel;
 using System.IO;
-
+using System.Data.Linq;
 
 namespace WpfApp5
 {
@@ -27,56 +27,27 @@ namespace WpfApp5
     /// </summary>
     public partial class MainWindow : Window
     {
-        //string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
-        string connectionString = @"Data Source=(LocalDB)\LocalDBQ;Initial Catalog=CRCMS_new; User ID=sa;Password=Qwerty123";
 
-        public List<GroupCs> listGroup = new List<GroupCs>();
+        private static DataContext dataContext;
+
         public MainWindow()
         {
             InitializeComponent();
 
+            dataContext = new DataContext(@"Data Source=(LocalDB)\LocalDBQ;Initial Catalog=CRCMS_new; User ID=sa;Password=Qwerty123");
 
-            SqlConnection con = new SqlConnection(connectionString);
-            try
-            {
-                con.Open();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            DataSet ds = new DataSet();
-            SqlCommand cmd = new SqlCommand();
-            cmd.CommandText = "SELECT * from dic_Group";
-            cmd.Connection = con;
-            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            Table<dic_Group> groups = dataContext.GetTable<dic_Group>();
+            GroupListView.ItemsSource = groups.ToList();
 
+            Table<dic_Model> models = dataContext.GetTable<dic_Model>();
+            ModelListView.ItemsSource = models.ToList();
 
-            da.Fill(ds);
+            Table<dic_Pavilion> pavilions = dataContext.GetTable<dic_Pavilion>();
+            PavilionListView.ItemsSource = pavilions.ToList();
 
-            ListViewItem groupID = new ListViewItem() { Content = "Id" };
-
-            //GroupListView.Items.Add("Id");
-            //GroupListView.Items.Add("Name");
-
-
-            //GroupListView.Items.Add(new ListViewItem { Content = "Id" });
-            //GroupListView.Items.Add(new ListViewItem { Content = "Name" });
-
-
-
-
-            foreach (DataRow row in ds.Tables[0].Rows)
-            {
-                listGroup.Add(new GroupCs { Id = Int32.Parse(row["GroupId"].ToString()), Name = row["Name"].ToString() });
-            }
-
-            GroupListView.ItemsSource = listGroup;
+            Table<dic_Status> statuses = dataContext.GetTable<dic_Status>();
+            StatusListView.ItemsSource = statuses.ToList();
         }
 
-        private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
     }
 }
